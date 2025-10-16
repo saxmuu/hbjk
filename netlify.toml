@@ -7,10 +7,12 @@
 
 [functions]
   node_bundler = "esbuild"
-  timeout = 10
-  # Imposta i permessi CORS per tutte le funzioni
-  included_files = ["netlify/functions/*.js"]
+  
+# Configurazione timeout corretta
+[functions.timeout]
+  default = 10  # Timeout in secondi
 
+# Redirects
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
