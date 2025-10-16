@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netlify Roblox Bypass - Educational Tool</title>
+    <title>Netlify Roblox Bypass - Sistema Educativo</title>
     <style>
         :root {
             --primary: #00c7b7;
@@ -26,17 +26,21 @@
             background: var(--background);
             color: var(--text);
             line-height: 1.6;
+            padding: 20px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         
         .header h1 {
@@ -48,6 +52,7 @@
         .header .subtitle {
             color: #64748b;
             font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
         
         .warning-banner {
@@ -55,9 +60,9 @@
             color: white;
             padding: 1rem;
             border-radius: 8px;
-            margin-bottom: 2rem;
             text-align: center;
             font-weight: 500;
+            margin-bottom: 2rem;
         }
         
         .dashboard {
@@ -118,6 +123,8 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
         }
         
         .btn-primary {
@@ -142,12 +149,6 @@
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
         }
         
         .stats-grid {
@@ -185,7 +186,7 @@
         
         .log-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
@@ -225,6 +226,12 @@
             color: #1e40af;
         }
         
+        .log-entry.warning {
+            background: #fffbeb;
+            border-left-color: var(--warning);
+            color: #92400e;
+        }
+        
         .log-timestamp {
             color: #64748b;
             font-size: 0.75rem;
@@ -235,69 +242,71 @@
     <div class="container">
         <div class="header">
             <h1>Netlify Roblox Bypass System</h1>
-            <p class="subtitle">Educational Tool for Cybersecurity Research</p>
-        </div>
-        
-        <div class="warning-banner">
-            ⚠️ FOR EDUCATIONAL PURPOSES ONLY - DO NOT USE FOR ACTUAL BYPASS
+            <p class="subtitle">Strumento Educativo per Ricerche sulla Sicurezza Informatica</p>
+            <div class="warning-banner">
+                ⚠️ SOLO A SCOPO EDUCATIVO - NON UTILIZZARE PER BYPASS REALI
+            </div>
         </div>
         
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value" id="total-requests">0</div>
-                <div class="stat-label">Total Requests</div>
+                <div class="stat-label">Richieste Totali</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="success-rate">0%</div>
-                <div class="stat-label">Success Rate</div>
+                <div class="stat-label">Tasso di Successo</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="active-regions">0</div>
-                <div class="stat-label">Active Regions</div>
+                <div class="stat-label">Regioni Attive</div>
             </div>
         </div>
         
         <div class="dashboard">
             <div class="card">
-                <h2>Single Request</h2>
+                <h2>Richiesta Singola</h2>
                 <div class="form-group">
                     <label for="gameId">Game ID</label>
-                    <input type="text" id="gameId" placeholder="e.g., 123456789" value="123456789">
+                    <input type="text" id="gameId" placeholder="es. 4924922222" value="4924922222">
                 </div>
                 <div class="form-group">
-                    <label for="serverId">Server ID (Optional)</label>
-                    <input type="text" id="serverId" placeholder="e.g., server-12345">
+                    <label for="serverId">Server ID (Opzionale)</label>
+                    <input type="text" id="serverId" placeholder="es. server-12345">
                 </div>
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="executeSingleBypass()">Execute Bypass</button>
-                    <button class="btn btn-success" onclick="testAllRegions()">Test All Regions</button>
+                <div>
+                    <button class="btn btn-primary" onclick="executeSingleBypass()">Esegui Bypass</button>
+                    <button class="btn btn-success" onclick="testAllRegions()">Test Tutte le Regioni</button>
+                    <button class="btn" onclick="testSafeMode()">Test Sicuro</button>
                 </div>
             </div>
             
             <div class="card">
-                <h2>Mass Bypass Control</h2>
+                <h2>Controllo Bypass Massivo</h2>
                 <div class="form-group">
-                    <label for="gameIds">Game IDs (comma-separated)</label>
-                    <input type="text" id="gameIds" placeholder="123456789,987654321,555555555" value="123456789,987654321,555555555">
+                    <label for="gameIds">Game IDs (separati da virgola)</label>
+                    <input type="text" id="gameIds" placeholder="4924922222,920587237,6284583030" value="4924922222,920587237">
                 </div>
                 <div class="form-group">
-                    <label for="requestsPerMinute">Requests Per Minute</label>
-                    <input type="number" id="requestsPerMinute" value="15" min="1" max="60">
+                    <label for="requestsPerMinute">Richieste per Minuto</label>
+                    <input type="number" id="requestsPerMinute" value="5" min="1" max="10">
                 </div>
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="startMassBypass()">Start Mass Bypass</button>
-                    <button class="btn btn-danger" onclick="stopMassBypass()">Stop</button>
+                <div>
+                    <button class="btn btn-primary" onclick="startMassBypass()">Avvia Bypass Massivo</button>
+                    <button class="btn btn-danger" onclick="stopMassBypass()">Ferma</button>
                 </div>
             </div>
         </div>
         
         <div class="log-container">
             <div class="log-header">
-                <h2>Execution Log</h2>
-                <button class="btn" onclick="clearLog()">Clear Log</button>
+                <h2>Log di Esecuzione</h2>
+                <button class="btn" onclick="clearLog()">Pulisci Log</button>
             </div>
             <div class="log-content" id="log-content">
-                <!-- Log entries will appear here -->
+                <div class="log-entry info">
+                    <span class="log-timestamp">[Sistema]</span> Pronto per i test educativi
+                </div>
             </div>
         </div>
     </div>
@@ -321,6 +330,7 @@
                 
                 this.massBypassInterval = null;
                 this.isMassBypassRunning = false;
+                this.safeMode = true;
             }
             
             log(message, type = 'info') {
@@ -368,10 +378,20 @@
                     
                     if (result.success) {
                         this.stats.successfulRequests++;
-                        this.log(`✅ SUCCESS via ${endpoint.toUpperCase()}: ${result.region} - Game ${gameId}`, 'success');
+                        this.log(`✅ SUCCESSO via ${endpoint.toUpperCase()}: ${result.region} - Game ${gameId}`, 'success');
+                        
+                        // Log dettagliato per analisi
+                        if (result.data && result.data.joinTicket) {
+                            this.log(`🎫 Ticket di join: ${result.data.joinTicket.substring(0, 20)}...`, 'info');
+                        }
                     } else {
                         this.stats.failedRequests++;
-                        this.log(`❌ FAILED via ${endpoint.toUpperCase()}: ${result.error}`, 'error');
+                        this.log(`❌ FALLITO via ${endpoint.toUpperCase()}: ${result.error}`, 'error');
+                        
+                        // Gestione errori specifici
+                        if (result.status === 429) {
+                            this.log(`📛 RATE LIMIT RILEVATO - Roblox ha bloccato la richiesta`, 'warning');
+                        }
                     }
                     
                     this.updateStats();
@@ -379,7 +399,7 @@
                     
                 } catch (error) {
                     this.stats.failedRequests++;
-                    this.log(`💥 ERROR with ${endpoint.toUpperCase()}: ${error.message}`, 'error');
+                    this.log(`💥 ERRORE con ${endpoint.toUpperCase()}: ${error.message}`, 'error');
                     this.updateStats();
                     return { success: false, error: error.message };
                 }
@@ -391,9 +411,26 @@
                 return await this.executeBypass(gameId, serverId, randomRegion);
             }
             
-            startMassBypass(gameIds, requestsPerMinute = 15) {
+            async executeSafeBypass(gameId, serverId = null) {
+                this.log('🔒 Avvio test in modalità sicura...', 'info');
+                
+                // Attesa forzata per sicurezza
+                await new Promise(resolve => setTimeout(resolve, 10000));
+                
+                const result = await this.executeRegionalBypass(gameId, serverId);
+                
+                // Analisi risultato per sicurezza
+                if (result.status === 429) {
+                    this.log('🚨 RILEVATO RATE LIMIT - Test interrotto per sicurezza', 'warning');
+                    this.stopMassBypass();
+                }
+                
+                return result;
+            }
+            
+            startMassBypass(gameIds, requestsPerMinute = 5) {
                 if (this.isMassBypassRunning) {
-                    this.log('Mass bypass is already running', 'info');
+                    this.log('Bypass massivo già in esecuzione', 'info');
                     return;
                 }
                 
@@ -401,7 +438,7 @@
                 const delay = 60000 / requestsPerMinute;
                 let currentIndex = 0;
                 
-                this.log(`🚀 Starting mass bypass: ${gameIds.length} games, ${requestsPerMinute} RPM`);
+                this.log(`🚀 Avvio bypass massivo: ${gameIds.length} giochi, ${requestsPerMinute} RPM`);
                 
                 this.massBypassInterval = setInterval(async () => {
                     if (!this.isMassBypassRunning) return;
@@ -410,7 +447,11 @@
                     
                     // Esegui con delay random per evitare pattern
                     setTimeout(async () => {
-                        await this.executeRegionalBypass(gameId, 'auto');
+                        if (this.safeMode) {
+                            await this.executeSafeBypass(gameId, 'auto');
+                        } else {
+                            await this.executeRegionalBypass(gameId, 'auto');
+                        }
                     }, Math.random() * 2000);
                     
                     currentIndex++;
@@ -423,7 +464,7 @@
                     clearInterval(this.massBypassInterval);
                     this.massBypassInterval = null;
                 }
-                this.log('🛑 Mass bypass stopped', 'info');
+                this.log('🛑 Bypass massivo fermato', 'info');
             }
             
             getPerformanceReport() {
@@ -442,13 +483,18 @@
         // Inizializza il client
         const client = new NetlifyBypassClient();
         
-        // Funzioni globali per i bottoni
+        // Funzioni globali per l'interfaccia
         async function executeSingleBypass() {
             const gameId = document.getElementById('gameId').value.trim();
             const serverId = document.getElementById('serverId').value.trim() || null;
             
             if (!gameId) {
-                client.log('⚠️ Please enter a Game ID', 'error');
+                client.log('⚠️ Inserisci un Game ID', 'error');
+                return;
+            }
+            
+            if (!/^\d+$/.test(gameId)) {
+                client.log('⚠️ Game ID deve contenere solo numeri', 'error');
                 return;
             }
             
@@ -460,35 +506,55 @@
             const serverId = document.getElementById('serverId').value.trim() || null;
             
             if (!gameId) {
-                client.log('⚠️ Please enter a Game ID', 'error');
+                client.log('⚠️ Inserisci un Game ID', 'error');
                 return;
             }
             
-            client.log('🧪 Testing all regions...', 'info');
+            client.log('🧪 Test di tutte le regioni...', 'info');
             
             for (const endpoint of ['main', 'eu', 'us', 'asia']) {
                 await client.executeBypass(gameId, serverId, endpoint);
-                // Piccola pausa tra le regioni
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Pausa di sicurezza tra le regioni
+                await new Promise(resolve => setTimeout(resolve, 2000));
             }
+        }
+        
+        async function testSafeMode() {
+            const gameId = document.getElementById('gameId').value.trim();
+            const serverId = document.getElementById('serverId').value.trim() || null;
+            
+            if (!gameId) {
+                client.log('⚠️ Inserisci un Game ID', 'error');
+                return;
+            }
+            
+            client.safeMode = true;
+            await client.executeSafeBypass(gameId, serverId);
         }
         
         function startMassBypass() {
             const gameIdsInput = document.getElementById('gameIds').value.trim();
-            const requestsPerMinute = parseInt(document.getElementById('requestsPerMinute').value) || 15;
+            const requestsPerMinute = parseInt(document.getElementById('requestsPerMinute').value) || 5;
             
             if (!gameIdsInput) {
-                client.log('⚠️ Please enter Game IDs for mass bypass', 'error');
+                client.log('⚠️ Inserisci Game IDs per il bypass massivo', 'error');
                 return;
             }
             
             const gameIds = gameIdsInput.split(',').map(id => id.trim()).filter(id => id);
             
             if (gameIds.length === 0) {
-                client.log('⚠️ No valid Game IDs found', 'error');
+                client.log('⚠️ Nessun Game ID valido trovato', 'error');
                 return;
             }
             
+            // Validazione sicurezza
+            if (requestsPerMinute > 10) {
+                client.log('⚠️ Limite di sicurezza: max 10 RPM', 'warning');
+                return;
+            }
+            
+            client.safeMode = requestsPerMinute <= 5;
             client.startMassBypass(gameIds, requestsPerMinute);
         }
         
@@ -498,16 +564,19 @@
         
         function clearLog() {
             document.getElementById('log-content').innerHTML = '';
-            client.log('📋 Log cleared', 'info');
+            client.log('📋 Log pulito', 'info');
         }
         
-        // Salva report periodico
+        // Salva report periodico nella console
         setInterval(() => {
             const report = client.getPerformanceReport();
             if (report.totalRequests > 0) {
                 console.log('Netlify Bypass Performance Report:', report);
             }
         }, 30000);
+        
+        // Esempio di utilizzo per testing
+        console.log('Netlify Bypass Client inizializzato');
     </script>
 </body>
 </html>
